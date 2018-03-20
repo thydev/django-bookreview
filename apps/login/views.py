@@ -6,9 +6,15 @@ import bcrypt
 # Create your views here.
 def index(request):
     request.session.modified = True
+    if 'loggedin' not in request.session:
+        request.session['loggedin'] = {
+            'id': -1,
+            'name': "undefined"
+        }
     return render(request, 'login/index.html')
 
 def login(request):
+    request.session.modified = True
     if request.method != "POST":
         return redirect('/')
     email = request.POST['email']
@@ -25,11 +31,16 @@ def login(request):
             messages.error(request, "Incorrect password.", extra_tags="login")
             return redirect('/')
         messages.success(request, "Successfully logged in !, Welcome {} {}".format(user.first_name, user.last_name))
+        request.session['loggedin'] = {
+            'id': user.id,
+            'name': "{} {}".format(user.first_name, user.last_name)
+        }
         return redirect('/login/success')
 
     return redirect('/')
 
 def create(request):
+    request.session.modified = True
     if request.method != "POST":
         return redirect('/')
         
@@ -44,11 +55,31 @@ def create(request):
     password = request.POST['password']
     # Encript the password by using bscrypt
     password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-    newuser = User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = password)
+    user = User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = password)
     # messages.success(request, "Successfully logged in!", extra_tags="success")
     messages.success(request, "Successfully logged in!")
+    request.session['loggedin'] = {
+        'id': user.id,
+        'name': "{} {}".format(user.first_name, user.last_name)
+    }
     return redirect('/login/success')
 
 def success(request):
+    # Redirect to the login if the user did not log in yet
+    if request.session['loggedin']['id'] == -1:
+        return redirect('/')
+
     # Display success message
     return render(request, 'login/success.html')
+
+def logout(request):
+    request.session.modified = True
+    request.session['loggedin'] = {
+            'id': -1,
+            'name': "undefined"
+        }
+    return redirect('/')
+
+def showuser(request, id):
+    # In books app or in login app?
+    pass

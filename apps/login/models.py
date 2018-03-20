@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import Q
 import re
 
+
 # create a regular expression object that we can use run operations on
 email_reg = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 pwd_reg = re.compile('^(?=\S{8,30}$)(?=.*?\d)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[^A-Za-z\s0-9])')
@@ -72,3 +73,14 @@ class User(models.Model):
 
     def __repr__(self):
         return "<User:{} {}>".format(self.first_name, self.last_name)
+
+# class Book_review(models.Model):
+#     # One user can review many books
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviewed_books")
+#     # One book can be reviewed by many users
+#     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviewed_by_users")
+#     review = models.TextField()
+#     rating = models.IntegerField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+    
