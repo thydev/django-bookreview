@@ -41,7 +41,7 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = BookManager()
-    reviewers = models.ManyToManyField('login.User', through='Book_Review')
+    reviewers = models.ManyToManyField('login.User', through='Book_Review', related_name="reviewed_books")
 
 # Many to many relationship between users and books
 class Book_Review(models.Model):

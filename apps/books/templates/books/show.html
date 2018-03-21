@@ -9,11 +9,13 @@
         {% for rv in book.book_reviews.all|dictsortreversed:"created_at" %}
         <div class="review_box">
             <p>Rating: {{ rv.rating }} *</p>
-            <p><a href="/users/{{rv.user.id}}">{{ rv.user.first_name }}</a> says: {{ rv.review }} </p>
-            <p>Posted on {{ rv.created_at|date:"N d, Y" }}</p>
-            {% if rv.user.id == request.session.loggedin.id %}
-            <a href="/books/{{book.id}}/delete/{{rv.id}}/review">Delete this review</a>
-            {% endif %}
+            <p><a href="/books/users/{{rv.user.id}}">{{ rv.user.first_name }}</a> says: {{ rv.review }} </p>
+            <p>Posted on {{ rv.created_at|date:"N d, Y" }}
+
+                {% if rv.user.id == request.session.loggedin.id %}
+                | <a href="/books/{{book.id}}/delete/{{rv.id}}/review" class="alert-danger">Delete this review</a>
+                {% endif %}
+            </p>
         </div>
         {% endfor %}
         

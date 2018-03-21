@@ -9,8 +9,7 @@
             <p><a href="/books/{{rev.book.id}}">{{ rev.book.title }}</a></p>
             <div class="subbox">
                 <p>Rating: {{rev.rating}} * </p>
-                <p><a href="/users/{{rev.user.id}}">{{ rev.user.first_name }}</a> says: {{ rev.review }} </p>
-                <p><a href="/users/{{bk.id}}">{{ bk.title}}</a>  </p>
+                <p><a href="/books/users/{{rev.user.id}}">{{ rev.user.first_name }}</a> says: {{ rev.review }} </p>
                 <p>Posted on {{ rev.created_at|date:"N d, Y" }}</p>
             </div>
         </div>

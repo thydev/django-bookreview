@@ -1,0 +1,21 @@
+{% extends 'books/base.html' %}
+    {% block content %}
+
+    <div class="container displayreview">
+        <h5>Alias: {{user.first_name}}</h5>
+        <h5>Name: {{user.first_name}} {{user.last_name}}</h5>
+        <h5>E-mail: {{user.email}}</h5>
+        <h5>Total reviews: {{user.reviewed_books.count}}</h5>
+        
+        <p>Posted reviews on the following books:</p>
+        <div class="subbox booklist">
+            {% for bk in user.reviewed_books.all %}
+            <a href="/books/{{bk.id}}">{{ bk.title }}</a>
+            {% endfor %}
+            
+        </div>
+        
+    </div>
+    
+
+    {% endblock %}

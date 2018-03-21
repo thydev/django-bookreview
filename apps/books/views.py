@@ -20,7 +20,7 @@ def isLogin(request):
 def index(request):
     if not isLogin(request):
         return redirect('/')
-        
+
     books = Book.objects.all()
     # Get the latest 3 from reviews
     reviews = Book_Review.objects.all().order_by('-created_at')[:3]
@@ -106,3 +106,13 @@ def delete_review(request, book_id, id):
    
     Book_Review.objects.get(id=id).delete()
     return redirect('/books/{}'.format(book_id))
+
+#Showing the user with its reviews
+def showuser(request, id):
+    if not isLogin(request):
+        return redirect('/')
+    user = User.objects.get(id=id)
+    context = {
+        'user': user,
+    }
+    return render(request, 'books/showuser.html', context)
