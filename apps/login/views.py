@@ -35,7 +35,8 @@ def login(request):
             'id': user.id,
             'name': "{} {}".format(user.first_name, user.last_name)
         }
-        return redirect('/login/success')
+        # return redirect('/login/success')
+        return redirect('/books')
 
     return redirect('/')
 
@@ -62,7 +63,8 @@ def create(request):
         'id': user.id,
         'name': "{} {}".format(user.first_name, user.last_name)
     }
-    return redirect('/login/success')
+    # return redirect('/login/success')
+    return redirect('/books')
 
 def success(request):
     # Redirect to the login if the user did not log in yet

@@ -39,3 +39,54 @@ body{
     width: 900px;
 }
 
+.displayreview{
+    width: 600px;
+    display: inline-block;
+    vertical-align: top;
+    /* background-color: beige; */
+}
+
+.addreview{
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.review_box{
+    border-top: 2px double grey;
+    padding: 5px;
+}
+.review_box a{
+    text-decoration: underline;
+}
+.displaybook{
+    width: 400px;
+    display: inline-block;
+    vertical-align: top;
+    /* background-color: beige; */
+}
+
+.booktitle{
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.booklist{
+    width: 300px;
+    border: 2px double cornflowerblue;
+    padding: 10px;
+}
+.booklist a{
+    display: block;
+    text-decoration: underline;
+    padding: 5px 0;
+}
+
+.subbox {
+    margin-left: 30px;
+}
+
+.loggedin{
+    border-bottom: 2px double gray;
+}

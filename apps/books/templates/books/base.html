@@ -19,10 +19,22 @@
         
     {% load static %}
     
-    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
-    <script src="{% static 'login/js/app.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'books/css/style.css' %}">
+    <script src="{% static 'books/js/app.js' %}"></script>
 </head>
 <body>
+    {% if request.session.loggedin.id != -1 %}
+    <div class="loggedin">
+        <p>Hello, <strong>{{request.session.loggedin.name}}</strong>
+            |
+            <a href="/books/add" class="">Add Book and Review</a>
+            | 
+            <a href="/books/" class="">Recent Book Review</a>
+            | 
+            <a href="/login/logout" class="">Log out</a>
+        </p>
+    </div>
+    {% endif %}
     {% block content %}
     {% endblock %}
 </body>
